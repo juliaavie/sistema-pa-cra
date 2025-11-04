@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import Login from './components/Login';
+import LavraturaWizard from './components/LavraturaWizard';
+import ProcessView from './components/ProcessView';
+import AutuadoPortal from './components/AutuadoPortal';
 
-function App() {
+export default function App() {
+  const [route, setRoute] = useState('login');
+  const [user, setUser] = useState(null);
+  const nav = (r) => setRoute(r);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      <Header onNavigate={nav} user={user} />
+      <main className="p-4 md:p-8 max-w-6xl mx-auto">
+        {route === 'login' && <Login onLogin={(u)=>{setUser(u); setRoute('lavratura');}} />}
+        {route === 'lavratura' && <LavraturaWizard />}
+        {route === 'process' && <ProcessView />}
+        {route === 'autuado' && <AutuadoPortal />}
+      </main>
     </div>
   );
 }
-
-export default App;
