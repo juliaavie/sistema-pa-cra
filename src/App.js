@@ -11,9 +11,9 @@ export default function App() {
   const nav = (r) => setRoute(r);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 text-gray-800">
       <Header onNavigate={nav} user={user} />
-      <main className="p-4 md:p-8 max-w-6xl mx-auto">
+      <main className="p-4 md:p-8 max-w-7xl mx-auto">
         {route === 'login' && <Login onLogin={(u)=>{setUser(u); setRoute('lavratura');}} />}
         {route === 'lavratura' && <LavraturaWizard />}
         {route === 'process' && <ProcessView />}

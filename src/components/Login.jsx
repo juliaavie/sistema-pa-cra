@@ -1,36 +1,66 @@
 import React, { useState } from 'react';
-export default function Login({ onLogin }){
+import './Login.css';
+
+export default function Login({ onLogin }) {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const submit = (e)=>{ e.preventDefault(); onLogin({name: 'Servidor Exemplo', email}); };
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin({ name: 'Servidor', email });
+  };
+
   return (
-    <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-      <div className="p-6 bg-white rounded shadow">
-        <h2 className="text-xl font-semibold mb-2">Acesse o Sistema PA</h2>
-        <p className="text-sm text-gray-600 mb-4">Área restrita para servidores. Utilize suas credenciais institucionais.</p>
-        <form onSubmit={submit} className="space-y-3">
-          <div>
-            <label className="block text-sm">E‑mail institucional</label>
-            <input required type="email" value={email} onChange={e=>setEmail(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
-          </div>
-          <div>
-            <label className="block text-sm">Senha</label>
-            <input required type="password" value={senha} onChange={e=>setSenha(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
-          </div>
-          <div className="flex items-center justify-between">
-            <button className="px-4 py-2 bg-blue-800 text-white rounded">Entrar</button>
-            <a className="text-sm text-blue-800">Esqueci a senha</a>
-          </div>
-        </form>
-      </div>
-      <div className="p-6">
-        <div className="bg-white rounded shadow p-6">
-          <h3 className="font-semibold">Portal do Cidadão</h3>
-          <p className="text-sm text-gray-600">O autuado também pode acessar para apresentar defesa e emitir DAE. Use o botão abaixo para abrir o portal público.</p>
-          <div className="mt-4">
-            <button className="px-3 py-2 border rounded" onClick={()=>alert('Acesso ao portal público (simulado)')}>Ir para Portal do Autuado</button>
-          </div>
+    <div className="login-container">
+      <div className="login-card">
+        {/* Cabeçalho */}
+        <div className="login-header">
+         <div className="logo">IMA</div>
+          <h1>Acesse o Sistema do IMA</h1>
+          <p>Área restrita para servidores. Utilize suas credenciais institucionais.</p>
         </div>
+
+        {/* Formulário */}
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label>E-mail institucional</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="seu.email@institucional.gov.br"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Senha</label>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button type="submit" className="login-btn">
+            Entrar
+          </button>
+        </form>
+
+        <div className="forgot-password">
+          <a href="#forgot">Esqueci a senha</a>
+        </div>
+      </div>
+
+      {/* Portal do Cidadão */}
+      <div className="portal-card">
+        <h3>Portal do Cidadão</h3>
+        <p>O autuado também pode acessar para apresentar defesa e emitir DAE. Use o botão abaixo para abrir o portal público.</p>
+        <button className="portal-btn">
+          Ir para Portal do Autuado
+        </button>
       </div>
     </div>
   );

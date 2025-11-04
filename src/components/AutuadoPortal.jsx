@@ -1,35 +1,122 @@
 import React, { useState } from 'react';
+import './AutuadoPortal.css';
+
 export default function AutuadoPortal(){
-  const [defesa, setDefesa] = useState(null);
-  const submit = ()=> alert('Defesa enviada (simulação).');
+  const [defesa, setDefesa] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [daeValue, setDaeValue] = useState('');
+  const [paymentType, setPaymentType] = useState('unique');
+
+  const submitDefesa = () => alert('Defesa enviada (simulação).');
+  const searchProcess = () => alert(`Pesquisando por: ${searchTerm}`);
+  const generateDAE = () => alert(`DAE gerado - Valor: R$ ${daeValue}, Tipo: ${paymentType}`);
+
   return (
-    <div className="bg-white rounded shadow p-6">
-      <h2 className="text-lg font-semibold mb-3">Portal do Autuado</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <h4 className="font-semibold">Consultar AI</h4>
-          <div className="mt-2 text-sm text-gray-600">Informe o número do auto ou CPF para consultar o processo.</div>
-          <div className="mt-3">
-            <input className="w-full border rounded px-3 py-2" placeholder="Nº do Auto / CPF" />
-            <button className="mt-2 px-3 py-2 bg-blue-800 text-white rounded">Pesquisar</button>
+    <div className="autuado-container">
+      <div className="autuado-card">
+        <h2 className="autuado-title">Portal do Autuado</h2>
+        <p className="autuado-subtitle">Área exclusiva para autuados apresentarem defesa e emitirem DAE</p>
+        
+        <div className="portal-grid">
+          {/* Consultar AI */}
+          <div className="portal-section">
+            <div className="section-header">
+              <h3 className="section-title">Consultar Auto de Infração</h3>
+              <div className="section-icon">🔍</div>
+            </div>
+            <p className="section-description">
+              Informe o número do auto ou CPF/CNPJ para consultar o processo administrativo.
+            </p>
+            <div className="search-form">
+              <input 
+                className="search-input"
+                placeholder="Nº do Auto / CPF / CNPJ" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="search-btn" onClick={searchProcess}>
+                Pesquisar
+              </button>
+            </div>
+          </div>
+
+          {/* Apresentar Defesa */}
+          <div className="portal-section">
+            <div className="section-header">
+              <h3 className="section-title">Apresentar Defesa</h3>
+              <div className="section-icon">📝</div>
+            </div>
+            <p className="section-description">
+              Anexe documentos e escreva sua defesa. O prazo será verificado automaticamente.
+            </p>
+            <textarea 
+              className="defesa-textarea"
+              rows={6} 
+              value={defesa}
+              onChange={e => setDefesa(e.target.value)}
+              placeholder="Descreva aqui os fatos e argumentos da sua defesa..."
+            />
+            <div className="defesa-actions">
+              <input type="file" className="file-input" />
+              <button onClick={submitDefesa} className="defesa-btn">
+                Enviar Defesa
+              </button>
+            </div>
+          </div>
+
+          {/* Emissão de DAE */}
+          <div className="portal-section full-width">
+            <div className="section-header">
+              <h3 className="section-title">Emissão de DAE</h3>
+              <div className="section-icon">💰</div>
+            </div>
+            <p className="section-description">
+              Simule valores e emita o Documento de Arrecadação Estadual online.
+            </p>
+            <div className="dae-form">
+              <div className="dae-input-group">
+                <label>Valor (R$)</label>
+                <input 
+                  className="dae-input"
+                  placeholder="0,00" 
+                  value={daeValue}
+                  onChange={(e) => setDaeValue(e.target.value)}
+                />
+              </div>
+              <div className="dae-input-group">
+                <label>Forma de Pagamento</label>
+                <select 
+                  className="dae-select"
+                  value={paymentType}
+                  onChange={(e) => setPaymentType(e.target.value)}
+                >
+                  <option value="unique">Pagamento único</option>
+                  <option value="installment">Parcelado</option>
+                </select>
+              </div>
+              <button className="dae-btn" onClick={generateDAE}>
+                Gerar DAE
+              </button>
+            </div>
           </div>
         </div>
-        <div>
-          <h4 className="font-semibold">Apresentar Defesa</h4>
-          <div className="mt-2 text-sm text-gray-600">Anexe documentos e escreva sua defesa. Prazo será verificado automaticamente.</div>
-          <textarea className="w-full border rounded px-3 py-2 mt-2" rows={6} value={defesa||''} onChange={e=>setDefesa(e.target.value)} />
-          <div className="flex gap-2 mt-2">
-            <input type="file" />
-            <button onClick={submit} className="px-3 py-2 bg-blue-800 text-white rounded">Enviar Defesa</button>
-          </div>
-        </div>
-        <div className="md:col-span-2 mt-4">
-          <h4 className="font-semibold">Emissão de DAE</h4>
-          <div className="mt-2 text-sm text-gray-600">Simule valores e emita o DAE online.</div>
-          <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2">
-            <input className="border rounded px-3 py-2" placeholder="Valor (R$)" />
-            <select className="border rounded px-3 py-2"><option>Pagamento único</option><option>Parcelado</option></select>
-            <button className="px-3 py-2 bg-blue-800 text-white rounded">Gerar DAE</button>
+
+        {/* Informações Adicionais */}
+        <div className="info-section">
+          <h4 className="info-title">Informações Importantes</h4>
+          <div className="info-grid">
+            <div className="info-item">
+              <strong>Prazo para Defesa:</strong> 30 dias úteis
+            </div>
+            <div className="info-item">
+              <strong>Horário de Atendimento:</strong> 08h às 17h
+            </div>
+            <div className="info-item">
+              <strong>Telefone:</strong> (31) 3215-0000
+            </div>
+            <div className="info-item">
+              <strong>E-mail:</strong> ouvidoria@ima.mg.gov.br
+            </div>
           </div>
         </div>
       </div>

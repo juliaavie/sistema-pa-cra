@@ -1,23 +1,42 @@
-import React from 'react';
 export default function Header({ onNavigate, user }){
   return (
-    <header className="bg-white border-b shadow-sm">
-      <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
+    <header className="bg-white border-b border-green-200 shadow-sm">
+      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-md bg-blue-800 flex items-center justify-center text-white font-bold">PA</div>
+          <div className="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-lg">IMA</div>
           <div>
-            <div className="font-semibold text-lg">Sistema PA</div>
-            <div className="text-xs text-gray-500">Gestão de Processos Administrativos</div>
+            <div className="font-semibold text-lg text-green-800">Instituto Mineiro de Agropecuária</div>
+            <div className="text-xs text-green-600">Sistema de Processos Administrativos</div>
           </div>
         </div>
-        <nav className="flex items-center gap-3">
-          <button className="text-sm px-3 py-2 rounded hover:bg-gray-100" onClick={()=>onNavigate('lavratura')}>Lavratura AI</button>
-          <button className="text-sm px-3 py-2 rounded hover:bg-gray-100" onClick={()=>onNavigate('process')}>Processos</button>
-          <button className="text-sm px-3 py-2 rounded hover:bg-gray-100" onClick={()=>onNavigate('autuado')}>Portal do Autuado</button>
+        <nav className="flex items-center gap-2">
+          <button 
+            className="text-sm px-4 py-2 rounded-lg hover:bg-green-50 text-green-700 font-medium transition-colors" 
+            onClick={()=>onNavigate('lavratura')}
+          >
+            Lavratura AI
+          </button>
+          <button 
+            className="text-sm px-4 py-2 rounded-lg hover:bg-green-50 text-green-700 font-medium transition-colors" 
+            onClick={()=>onNavigate('process')}
+          >
+            Processos
+          </button>
+          <button 
+            className="text-sm px-4 py-2 rounded-lg hover:bg-green-50 text-green-700 font-medium transition-colors" 
+            onClick={()=>onNavigate('autuado')}
+          >
+            Portal do Autuado
+          </button>
           {user ? (
-            <div className="ml-3 text-sm text-gray-700">{user.name}</div>
+            <div className="ml-4 text-sm text-green-700 font-medium">{user.name}</div>
           ) : (
-            <button className="ml-3 text-sm px-3 py-2 bg-blue-800 text-white rounded" onClick={()=>onNavigate('login')}>Entrar</button>
+            <button 
+              className="ml-4 text-sm px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors" 
+              onClick={()=>onNavigate('login')}
+            >
+              Entrar
+            </button>
           )}
         </nav>
       </div>
