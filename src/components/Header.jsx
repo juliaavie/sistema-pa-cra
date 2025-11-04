@@ -1,41 +1,53 @@
 export default function Header({ onNavigate, user }){
   return (
-    <header className="bg-white border-b border-green-200 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-lg">IMA</div>
+    <header className="bg-white border-b border-green-200 shadow-lg">
+      <div className="max-w-7xl mx-auto flex items-center justify-between p-6">
+        {/* Logo e Título */}
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center text-white font-bold text-xl shadow-md">
+            IMA
+          </div>
           <div>
-            <div className="font-semibold text-lg text-green-800">Instituto Mineiro de Agropecuária</div>
-            <div className="text-xs text-green-600">Sistema de Processos Administrativos</div>
+            <div className="font-bold text-xl text-green-800 leading-tight">
+              Instituto Mineiro de Agropecuária
+            </div>
+            <div className="text-sm text-green-600 font-medium">
+              Sistema de Processos Administrativos
+            </div>
           </div>
         </div>
-        <nav className="flex items-center gap-2">
-          <button 
-            className="text-sm px-4 py-2 rounded-lg hover:bg-green-50 text-green-700 font-medium transition-colors" 
+
+        {/* Navegação */}
+        <nav className="flex items-center gap-3">
+          <button
+            className="px-6 py-3 rounded-xl hover:bg-green-50 text-green-800 font-semibold text-base border border-green-200 hover:border-green-300 transition-all duration-200 hover:shadow-md"
             onClick={()=>onNavigate('lavratura')}
           >
-            Lavratura AI
+            📄 Lavratura AI
           </button>
-          <button 
-            className="text-sm px-4 py-2 rounded-lg hover:bg-green-50 text-green-700 font-medium transition-colors" 
+          <button
+            className="px-6 py-3 rounded-xl hover:bg-green-50 text-green-800 font-semibold text-base border border-green-200 hover:border-green-300 transition-all duration-200 hover:shadow-md"
             onClick={()=>onNavigate('process')}
           >
-            Processos
+            📋 Processos
           </button>
-          <button 
-            className="text-sm px-4 py-2 rounded-lg hover:bg-green-50 text-green-700 font-medium transition-colors" 
+          <button
+            className="px-6 py-3 rounded-xl hover:bg-green-50 text-green-800 font-semibold text-base border border-green-200 hover:border-green-300 transition-all duration-200 hover:shadow-md"
             onClick={()=>onNavigate('autuado')}
           >
-            Portal do Autuado
+            👤 Portal do Autuado
           </button>
+          
           {user ? (
-            <div className="ml-4 text-sm text-green-700 font-medium">{user.name}</div>
+            <div className="ml-4 px-4 py-2 bg-green-100 rounded-lg border border-green-200">
+              <div className="text-green-800 font-semibold text-base">👋 {user.name}</div>
+            </div>
           ) : (
-            <button 
-              className="ml-4 text-sm px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors" 
+            <button
+              className="ml-4 px-6 py-3 bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl font-semibold text-base transition-all duration-200 shadow-md hover:shadow-lg"
               onClick={()=>onNavigate('login')}
             >
-              Entrar
+              🔐 Entrar
             </button>
           )}
         </nav>
